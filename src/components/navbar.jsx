@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { close, Logo, menu } from "../assets";
+import {  Logo } from "../assets";
 import { navLinks } from "../constants";
 import { IoIosMenu } from "react-icons/io";
 import { IoCloseOutline } from "react-icons/io5";
@@ -15,7 +15,7 @@ function Navbar() {
     <>
         {/* border line #EBEBEB 1px.          *shadow is prettier */}
             <nav className="w-auto bg-white border-b border-linecolor">
-              <div className="container mx-auto px-4 py-2 flex items-center justify-between">
+              <div className="container mx-auto px-4 py-2 flex items-center justify-between ">
                   <div className="flex items-center m-2">
                     <img
                       className="w-24"
@@ -23,22 +23,27 @@ function Navbar() {
                       alt="Logo"
                     /> 
                   </div>
+                    <div className="sm:flex hidden mr-56">
+                          <ul className="flex space-x-4">
+                            {navLinks.map((nav, index) => (
+                              <li
+                                key={nav.id}
+                                className={`transition duration-300 ${
+                                  active === nav.title ? "text-lime1" : "text-lime2"
+                                } ${index === navLinks.length - 1 ? "mr-1" : "mr-0"}`}
+                                onClick={() => setActive(nav.title)}
+                              >
+                                <a href={`#${nav.id}`}>{nav.title}</a>
+                              </li>
+                            ))}
 
-                        <ul className=" sm:flex hidden space-x-4 mr-10">
-                          {navLinks.map((nav, index) => (
-                            <li
-                              key={nav.id}
-                              className={`transition duration-300 ${
-                                active === nav.title ? "text-lime1" : "text-lime2"
-                              } ${index === navLinks.length - 1 ? "mr-1" : "mr-0"}`}
-                              onClick={() => setActive(nav.title)}
-                            >
-                              <a href={`#${nav.id}`}>{nav.title}</a>
-                            </li>
-                          ))}
-                        </ul>
+                          </ul>
+                        </div>
+                        <div className="sm:flex hidden ml-56">
+                          <button className="rounded-full px-4 py-2 bg-lime1 text-white hover:bg-lime2 duration-300 ">登入</button>
+                        </div>
+
                         
-                      <button className="rounded-full px-4 py-2 bg-lime1 text-white hover:bg-lime2 duration-300 ">登入</button>
 
                     <div className="sm:hidden flex flex-1 justify-end items-center">
 
@@ -58,13 +63,13 @@ function Navbar() {
                         <div
                           className={`${
                             !toggle ? "hidden" : "flex"
-                          } flex-col p-6 bg-lime1 absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
+                          } z-10 flex-col bg-lime1 absolute p-10 top-16 left-0 w-full h-full justify-between`}
                         >
-                          <ul className="list-none flex justify-end items-start flex-1 flex-col">
+                          <ul className="list-none flex flex-col ml-8 tracking-widest">
                             {navLinks.map((nav, index) => (
                               <li
                                 key={nav.id}
-                                className={`font-poppins font-medium cursor-pointer text-[16px] ${
+                                className={`cursor-pointer text-[20px] ${
                                   active === nav.title ? "text-lime2" : "text-white"
                                 } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
                                 onClick={() => setActive(nav.title)}
@@ -74,9 +79,9 @@ function Navbar() {
                             ))}
 
                           </ul>
-                          <button className="rounded-full px-4 py-2 bg-white text-lime1 hover:bg-lime2 duration-300 ">登入</button>
-
-
+                          <div className="ml-8">
+                            <button className="rounded-full w-20 px-4 py-2 bg-white text-lime1 hover:bg-lime2 duration-300 ">登入</button>
+                          </div>
                         </div>
 
                     </div>
