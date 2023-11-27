@@ -40,33 +40,42 @@ function Main() {
   
 
   const handleAreaChange = (area) => {
-    const updatedAreas = [...selectedAreas];
+    const updatedAreas = [...selectedAreas]; // 創建已選取地區的新陣列
+  
     if (updatedAreas.includes(area)) {
-      const index = updatedAreas.indexOf(area);
-      updatedAreas.splice(index, 1);
+      // 如果已選取地區陣列包含這個地區
+      const index = updatedAreas.indexOf(area); // 找到這個地區在陣列中的索引
+      updatedAreas.splice(index, 1); // 從陣列中移除這個地區
     } else {
-      updatedAreas.push(area);
+      updatedAreas.push(area); // 否則，將這個地區加入到已選取地區的陣列中
     }
-    setSelectedAreas(updatedAreas);
+  
+    setSelectedAreas(updatedAreas); // 更新選取的地區狀態
   };
-
+  
   const handleSelectAll = () => {
     if (selectedAreas.length === selectedCity.areas.length) {
-      setSelectedAreas([]); // Deselect all if all are currently selected
+      setSelectedAreas([]); // 如果所有地區都已選取，則取消選取所有地區
     } else {
-      setSelectedAreas([...selectedCity.areas]); // Select all areas
+      setSelectedAreas([...selectedCity.areas]); // 否則選取所有地區
     }
   };
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
+  const handleSearch = (event) => {//接收事件作為參數
+    setSearchTerm(event.target.value);//事件中獲取搜索框中的值 (event.target.value)，並將其設定為 searchTerm 狀態的新值。
   };
 
-   // Filter bikeData based on search term
-   const filteredBikeData = bikeData.filter((site) => {
-    // Replace 'sna' with the actual key containing station names, if different
-    const stationName = site.sna || ''; // Replace 'sna' with the correct key
-    return stationName.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+// 根據搜尋詞和選取的地區過濾 YouBike 資料
+const filteredBikeData = bikeData.filter((site) => {
+  const stationName = site.sna || 'undefined'; // 替換 'sna' 為正確的鍵值
+  const isNameMatch = stationName.toLowerCase().includes(searchTerm.toLowerCase());
+
+  const isAreaMatch = selectedAreas.length === 0 || selectedAreas.includes(site.sarea);
+  // 若沒有選取的地區或是選取的地區包含站點的 .sarea，則回傳 true
+
+  return isNameMatch && isAreaMatch;
+  // 回傳站點名稱和地區是否符合搜尋條件
+});
+
 
 
 
