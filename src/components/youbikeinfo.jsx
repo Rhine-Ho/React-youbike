@@ -84,23 +84,23 @@ const filteredBikeData = bikeData.filter((site) => {
     <h1 className="text-2xl font-bold text-lime1">站點資訊</h1>
     <form className="mt-2 flex items-center ">
       {/* city drop down options */}
-      <div className="w-1/4 mr-2">
+      <div className="mr-2">
         <button
-          className="inline-flex w-44 justify-around gap-x-1.5 pl-6 rounded-md bg-boxcolor px-3 py-2 mt-2 text-sm font-semibold text-gray-900 shadow-sm ring-inset ring-gray-300 hover:bg-gray-50 focus:ring-2 focus:outline-none focus:ring-gray-300 cursor-pointer"
+          className="inline-flex w-48 justify-around gap-x-1.5 pl-6 rounded-md bg-boxcolor px-3 py-2 mt-2 text-sm font-semibold text-gray-900 shadow-sm ring-inset ring-gray-300 hover:bg-gray-50 focus:ring-2 focus:outline-none focus:ring-gray-300 cursor-pointer"
           onClick={handleButtonClick}
         >
           {selectedCity ? selectedCity.name :'Select City'}
           <AiFillCaretDown className="mt-1.5 h-3 w-3" aria-hidden="true" />
         </button>
       </div>
-      <div className="mt-2 border border-boxcolor w-52 flex items-center bg-boxcolor rounded-md">
+      <div className="mt-2 border border-boxcolor flex items-center bg-boxcolor rounded-md">
           <input
             type="search"
             id={`#${cities.id}`}
             name={`#${cities.name}`}
             value={searchTerm}
             onChange={handleSearch}
-            className="block p-2 w-full text-sm bg-boxcolor rounded-s-md text-gray-900 "
+            className="block p-2 text-sm bg-boxcolor rounded-s-md text-gray-900 w-64"
             placeholder="搜尋站點"
           />
 
@@ -141,63 +141,68 @@ const filteredBikeData = bikeData.filter((site) => {
               onChange={handleSelectAll}
               className="mr-2"
             />
-            <label htmlFor="selectAll">Select All</label>
+            <label htmlFor="selectAll"className="font-semibold text-md tracking-wider">全部選取</label>
           </div>
 
           {/* Individual area checkboxes */}
           {selectedCity.areas.map((area) => (
-            <div key={area} className="inline-flex p-1 items-center ">
+            <div key={area} className="inline-flex p-1 items-center sm:flex-wrap pr-20 py-5">
               <input
                 type="checkbox"
                 id={area}
                 name={area}
                 checked={selectedAreas.includes(area)}
                 onChange={() => handleAreaChange(area)}
-                className=""
+                className="text-md"
               />
-              <label htmlFor={area}>{area}</label>
+              <label htmlFor={area} className="ml-2 font-semibold text-md tracking-wider">{area}</label>
             </div>
           ))}
         </div>
       )}
 
       {/* img zone */}
-      <div className="hidden sm:block bg-white mx-24">
-        <img src={RideBike} alt="bike" className="w-72 h-48 mx-20" />
+      <div className="hidden sm:block bg-white mx-24 justify-center items-center">
+        <img src={RideBike} alt="bike" className=" mx-5" />
       </div>
     </div>
 
-    <div className='mt-8  w-full'>
-      <table className='rounded-md bg-lime1 text-white text-lg'>
-        <thead>
-          <tr className='text-sm'>
-            <th className="px-0 py-2">縣市</th>
-            <th className="px-1 py-2">區域</th>
-            <th className="px-1 py-2">場站名稱</th>
-            <th className="px-1 py-2">可借車輛</th>
-            <th className="px-1 py-2">可還空位</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div className='mt-8 w-full max-w-full overflow-hidden'>
+  <div className='max-h-96 overflow-y-scroll'>
+    <table className='rounded-md bg-lime1 text-white text-lg w-full'>
+      <thead>
+        <tr className='text-sm'>
+          <th className="px-1 py-2">縣市</th>
+          <th className="px-1 py-2">區域</th>
+          <th className="px-1 py-2">場站名稱</th>
+          <th className="px-1 py-2">可借車輛</th>
+          <th className="px-1 py-2">可還空位</th>
+        </tr>
+      </thead>
+      <tbody className="w-full">
         {filteredBikeData.length > 0 ? (
-              filteredBikeData.map((site) => (
+          filteredBikeData.map((site) => (
+            <tr
+              key={site.sno}
+              className='rounded-b-md text-xs odd:bg-white even:bg-gray-200 text-gray-900 rounded-md'
+            >
+              <td scope="row" className="px-3 py-2">{selectedCity.name}</td>
+              <td className="px-3 py-2">{site.sarea}</td>
+              <td className="px-3 py-2">{site.sna}</td>
+              <td className="px-3 py-2">{site.sbi}</td>
+              <td className="px-3 py-2">{site.bemp}</td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="5">資料載入中...</td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</div>
 
-                <tr key={site.sno} className='text-xs odd:bg-white even:bg-boxcolor text-gray-900 rounded-md'>
-                  <td scope="row" className="px-3 py-2">{selectedCity.name}</td>
-                  <td className="px-3 py-2">{site.sarea}</td>
-                  <td className="px-3 py-2">{site.sna}</td>
-                  <td className="px-3 py-2">{site.sbi}</td>
-                  <td className="px-3 py-2">{site.bemp}</td>
-                </tr>
-              ))
-          ) : (
-            <tr>
-              <td colSpan="5">資料載入中...</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
     </section>
   );
 }
