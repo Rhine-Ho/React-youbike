@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function Datalist() {
   const [bikeData, setBikeData] = useState([]);
@@ -18,30 +18,31 @@ function Datalist() {
 
   return (
     <>
-      <div className='mt-2 overflow-y-scroll'>
-        <table className='rounded-md bg-lime1 text-white h-16 text-lg justify-center'>
-          <thead>
-            <tr className='text-sm'>
-              <th className="px-0 py-2">縣市</th>
-              <th className="px-1 py-2">區域</th>
-              <th className="px-1 py-2">場站名稱</th>
-              <th className="px-1 py-2">可借車輛</th>
-              <th className="px-1 py-2">可還空位</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bikeData.map(site => (
-              <tr key={site.sno} className='text-xs  odd:bg-white even:bg-boxcolor text-gray-900 rounded-md'>
-                <td scope="row" className="px-3 py-2">{site.ar}</td>
-                <td className="px-3 py-2">{site.sarea}</td>
-                <td className="px-3 py-2">{site.sna}</td>
-                <td className="px-3 py-2">{site.sbi}</td>
-                <td className="px-3 py-2">{site.bemp}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+   <div className='mt-2 overflow-y-scroll w-full'>
+  <table className='rounded-md bg-lime1 text-white text-lg'>
+    <thead>
+      <tr className='text-sm'>
+        <th className="px-0 py-2">縣市</th>
+        <th className="px-1 py-2">區域</th>
+        <th className="px-1 py-2">場站名稱</th>
+        <th className="px-1 py-2">可借車輛</th>
+        <th className="px-1 py-2">可還空位</th>
+      </tr>
+    </thead>
+    <tbody>
+      {bikeData.map(site => (
+        <tr key={site.sno} className='text-xs odd:bg-white even:bg-boxcolor text-gray-900 rounded-md'>
+          <td scope="row" className="px-3 py-2">{site.ar}</td>
+          <td className="px-3 py-2">{site.sarea}</td>
+          <td className="px-3 py-2">{site.sna}</td>
+          <td className="px-3 py-2">{site.sbi}</td>
+          <td className="px-3 py-2">{site.bemp}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { cities } from '../constants'; // Importing the cities constant from a file
 import { RideBike } from '../assets';
 import { SlMagnifier } from 'react-icons/sl';
@@ -44,8 +44,9 @@ function Main() {
 
   return (
     <section className="container mx-auto px-4 py-8">
+      <div></div>
       <h1 className="text-2xl font-bold text-lime1">站點資訊</h1>
-      <form className="mt-2 flex items-center">
+      <form className="mt-2 flex items-center ">
         {/* city drop down options */}
         <div className="w-1/4 mr-2">
           <button
@@ -125,7 +126,7 @@ function Main() {
         
 
         {/* img zone */}
-        <div className="bg-white mx-24">
+        <div className="hidden sm:block bg-white mx-24">
           <img src={RideBike} alt="bike" className="w-72 h-48 mx-20" />
         </div>
       </div>
