@@ -82,7 +82,8 @@ const filteredBikeData = bikeData.filter((site) => {
   return (
     <section className="container mx-auto px-4 py-8">
     <h1 className="text-2xl font-bold text-lime1">站點資訊</h1>
-    <form className="mt-2 flex items-center ">
+    <div className='sm:flex sm:flex-col w-1/2'>
+    <form className="mt-2 flex flex-col sm:flex-row  ">
       {/* city drop down options */}
       <div className="mr-2">
         <button
@@ -93,7 +94,7 @@ const filteredBikeData = bikeData.filter((site) => {
           <AiFillCaretDown className="mt-1.5 h-3 w-3" aria-hidden="true" />
         </button>
       </div>
-      <div className="mt-2 border border-boxcolor flex items-center bg-boxcolor rounded-md">
+      <div className="mt-2 border border-boxcolor flex items-center bg-boxcolor rounded-md sm:w-1/2">
           <input
             type="search"
             id={`#${cities.id}`}
@@ -126,6 +127,7 @@ const filteredBikeData = bikeData.filter((site) => {
         </div>
       </div>
     )}
+      </div>
 
     <div className='flex justify-between h-full '>
       {/* checkbox */}
@@ -160,6 +162,7 @@ const filteredBikeData = bikeData.filter((site) => {
           ))}
         </div>
       )}
+    
 
       {/* img zone */}
       <div className="hidden sm:block bg-white mx-24 justify-center items-center">
